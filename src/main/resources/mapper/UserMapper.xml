@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.han.bi.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.han.bi.model.entity.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userAccount" column="user_account" jdbcType="VARCHAR"/>
+            <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="userAvatar" column="user_avatar" jdbcType="VARCHAR"/>
+            <result property="leftCount" column="left_count" jdbcType="INTEGER"/>
+            <result property="signInTime" column="sign_in_time" jdbcType="TIMESTAMP"/>
+            <result property="userRole" column="user_role" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_account,user_password,left_count,sign_in_time,
+        user_name,user_avatar,user_role,
+        create_time,update_time,is_delete
+    </sql>
+    <select id="selectLeftCount" resultType="java.lang.Integer">
+        select left_count from user where user_account = #{userAccount};
+    </select>
+    <select id="getSignInTime" resultType="java.time.LocalDate">
+        select sign_in_time from user where user_account = #{userAccount};
+    </select>
+</mapper>

@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: bi-backend
+  # 支持 swagger3
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # session 配置
+  session:
+    # 30 天过期
+    timeout: 2592000
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://MySQL服务器地址:3306/bi
+    username: root
+    password: 密码
+  # Redis 配置
+  redis:
+    database: 0
+    host: Redis服务器地址
+    port: 6379
+    timeout: 5000
+    password: 密码
+    lettuce: #lettuce是springboot内置的，如果用jedis还需要导入相应依赖
+      pool:
+        max-active: 8  #最大连接
+        max-idle: 8   #最大空闲连接
+        min-idle: 0   #最小空闲连接
+        max-wait: 1000ms #连接等待时间
+  redisson:
+    database: 1
+    host: Redis服务器地址
+    port: 6379
+    timeout: 5000
+    password: 密码
+  rabbitmq:
+    host: rabbitmq服务器地址
+    port: 5672
+    username: root
+    password: 密码
+    listener:
+      type: simple
+      simple:
+        default-requeue-rejected: false
+        acknowledge-mode: manual
+server:
+  port: 端口
+  address: 0.0.0.0
+  servlet:
+    context-path: /api
+    # cookie 30 天过期
+    session:
+      cookie:
+        max-age: 2592000
+mybatis-plus:
+  configuration:
+    # 生产环境关闭日志
+    log-impl: ''
+
